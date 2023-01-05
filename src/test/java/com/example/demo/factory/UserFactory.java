@@ -1,6 +1,6 @@
 package com.example.demo.factory;
 
-import com.example.demo.model.User;
+import com.example.demo.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
