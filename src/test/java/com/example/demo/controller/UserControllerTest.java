@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
+import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.demo.factory.UserFactory.*;
+import static com.example.demo.factory.UserFactory.createUserList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 
 @ExtendWith(SpringExtension.class)
@@ -37,7 +37,7 @@ public class UserControllerTest {
 
         ResponseEntity<List<User>> allUsers = userController.getAllUsers();
 
-        assertEquals("",expectedReturn, allUsers);
+        assertEquals(expectedReturn, allUsers);
         verify(userService).getAllUsers();
     }
 
@@ -49,7 +49,7 @@ public class UserControllerTest {
         when(userService.getAllUsers()).thenReturn(Optional.of(userList));
 
         ResponseEntity<List<User>> allUsers = userController.getAllUsers();
-        assertEquals("",expectedReturn, allUsers);
+        assertEquals(expectedReturn, allUsers);
         verify(userService).getAllUsers();
     }
 
@@ -60,7 +60,8 @@ public class UserControllerTest {
         when(userService.getAllUsers()).thenThrow(new RuntimeException());
 
         ResponseEntity<List<User>> allUsers = userController.getAllUsers();
-        assertEquals("",expectedReturn, allUsers);
+
+        assertEquals(expectedReturn, allUsers);
         verify(userService).getAllUsers();
     }
 }

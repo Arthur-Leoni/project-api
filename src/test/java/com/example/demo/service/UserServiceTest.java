@@ -1,26 +1,22 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
+import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.example.demo.factory.UserFactory.createUserList;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 
 @ExtendWith(SpringExtension.class)
@@ -40,7 +36,7 @@ public class UserServiceTest {
         when(userRepository.getAllUsers()).thenReturn(Optional.of(userList));
         Optional<List<User>> allUsers = userService.getAllUsers();
 
-        assertEquals("",expectedReturn, allUsers);
+        assertEquals(expectedReturn, allUsers);
         verify(userRepository).getAllUsers();
     }
 
